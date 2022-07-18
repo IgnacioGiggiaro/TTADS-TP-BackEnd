@@ -3,13 +3,13 @@ const stream = require("stream");
 const { Schema }=mongoose;
 
 const PacienteSchema = new Schema({
-    dni:{type:String, requited:true},
-    nombre : { type: String, requited:true},
-    apellido: { type: String, requited:true},
-    telefono: { type: String, requited:true},
-    mail: { type: String, requited:true},
-    direccion: { type: String, requited:true},
-    fecha_nac:{ type: Date, requited:true}
+    dni:{type:String, required:true},
+    nombre : { type: String, required:true},
+    apellido: { type: String, required:true},
+    telefono: { type: String, required:true},
+    mail: { type: String, required:true},
+    direccion: { type: String, required:true},
+    fecha_nac:{ type: Date, required:true}
 });
 
 module.exports=mongoose.model('Paciente', PacienteSchema)

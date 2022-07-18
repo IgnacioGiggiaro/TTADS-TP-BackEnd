@@ -3,7 +3,7 @@ const stream = require("stream");
 const { Schema }=mongoose;
 
 const ObraSocialSchema = new Schema({
-    nombre : { type: String, requited:true}
+    nombre : { type: String, required:true}
 });
 
 module.exports=mongoose.model('ObraSocial', ObraSocialSchema)
