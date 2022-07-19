@@ -1,14 +1,14 @@
 {
   "name": "tpbackend",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "TP-BackEnd\r Repositorio del trabajo practico de TTADS",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Grupo 11",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -22,5 +22,14 @@
     "nodemon": "^2.0.16",
     "passport": "^0.5.2",
     "passport-local": "^1.0.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IgnacioGiggiaro/Tomb.git"
+  },
+  "bugs": {
+    "url": "https://github.com/IgnacioGiggiaro/Tomb/issues"
+  },
+  "homepage": "https://github.com/IgnacioGiggiaro/Tomb#readme"
 }
