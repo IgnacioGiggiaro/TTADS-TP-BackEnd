@@ -1,4 +1,4 @@
-const {ObraSocial} = require('../models/index');
+const {ObraSocial} = require('../models');
 
 const obraSocialController = {
     createObraSocial: async (req, res) => {
@@ -32,9 +32,11 @@ const obraSocialController = {
             if(!detailed){
                 obraSocial=await ObraSocial.findById(req.params.id).exec();
             }else{
-                const obraSocialModel = await ObraSocial.findById(req.params.id).populate({path:})
+                const obraSocialModel = await ObraSocial.findById(req.params.id).populate({path:''})
 
             }
+        }catch (err){
+
         }
     }
 

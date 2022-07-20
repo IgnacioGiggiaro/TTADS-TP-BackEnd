@@ -1,5 +1,5 @@
 const express = require('express');
-const controller = require('../controllers/obraSocial');
+const controller = require('../controllers/ObraSocial');
 const router = express.Router();
 
 router.get('/', controller.getObraSocial);
