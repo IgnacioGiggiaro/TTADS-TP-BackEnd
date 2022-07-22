@@ -32,7 +32,7 @@ app.use(session({
 //Routes
 app.use(require('./routes'));
 app.use(require('./routes/Paciente'));
-app.use(require('./routes/Profesional'));
+app.use(require('./routes/Professional'));
 app.use(require('./routes/Schedule'));
 app.use(require('./routes/Turno'));
 app.use(require('./routes/obraSocial'));

@@ -1,7 +1,7 @@
 const ObraSocial = require ('./obraSocial');
 const Paciente = require ('./paciente');
 const Practica = require ('./practica');
-const Profesional = require('./profesional');
+const Profesional = require('./Professional');
 const Schedule = require ('./schedule');
 const Turno = require ('./turno');
 
