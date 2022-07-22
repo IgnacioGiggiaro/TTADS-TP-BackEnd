@@ -1,4 +1,4 @@
-const profesional = require ('../models/Profesional');
+/*const profesional = require ('../models/Profesional');
 const profesionalController = {
     getProf: async (req, res) => {
         try {
@@ -11,4 +11,4 @@ const profesionalController = {
 
 
 
-}
+}*/

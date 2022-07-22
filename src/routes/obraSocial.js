@@ -5,7 +5,7 @@ const router = express.Router();
 router.get('/', controller.getObraSocial);
 router.get('/:id',controller.getObraSociales);
 router.post('/', controller.createObraSocial);
-router.delete('/:id', controller.deleteObraSocial);
-router.put('/:id', controller.updateObraSocial);
+/*router.delete('/:id', controller.deleteObraSocial);
+router.put('/:id', controller.updateObraSocial);*/
 
 module.exports = router;

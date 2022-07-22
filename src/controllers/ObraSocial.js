@@ -1,4 +1,4 @@
-const {ObraSocial} = require('../models');
+const {ObraSocial} = require('../models/ObraSocial');
 
 const obraSocialController = {
     createObraSocial: async (req, res) => {

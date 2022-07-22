@@ -1,14 +1,12 @@
-const ObraSocial = require ('./obraSocial');
-const Paciente = require ('./paciente');
-const Practica = require ('./practica');
-const Profesional = require('./profesional');
-const Schedule = require ('./schedule');
-const Turno = require ('./turno');
+const ObraSocial = require ('./ObraSocial');
+const Paciente = require ('./Paciente');
+const Profesional = require('./Profesional');
+const Schedule = require ('./Schedule');
+const Turno = require ('./Turno');
 
 module.exports = {
     ObraSocial,
     Paciente,
-    Practica,
     Profesional,
     Schedule,
     Turno,
