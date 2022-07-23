@@ -6,4 +6,6 @@ const ObraSocialSchema = new Schema({
     nombre : { type: String, required:true}
 });
 
+
+
 module.exports=mongoose.model('ObraSocial', ObraSocialSchema)
