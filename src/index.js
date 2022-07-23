@@ -30,13 +30,12 @@ app.use(session({
 //Global Variables
 
 //Routes
-app.use(require('./routes'));
+app.use(require('./routes/Index'));
 app.use(require('./routes/Paciente'));
 app.use(require('./routes/Professional'));
 app.use(require('./routes/Schedule'));
 app.use(require('./routes/Turno'));
 app.use(require('./routes/obraSocial'));
-app.use(require('./routes/Practica'));
 //Static Files
 app.use(express.static(path.join(__dirname,'public')));
 //Server is listenning
