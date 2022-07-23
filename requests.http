@@ -9,7 +9,7 @@ Content-Type: application/json
 GET http://localhost:3000/ObraSocial/62db147cf2ebd3bf2140334d HTTP/1.1
 
 ###
-DELETE http://localhost:3000/ObraSocial/62db147cf2ebd3bf2140334d HTTP/1.1
+DELETE http://localhost:3000/ObraSocialDelete/62db147cf2ebd3bf2140334d HTTP/1.1
 
 ###
 PUT http://localhost:3000/ObraSocialUpdate/62db147cf2ebd3bf2140334d HTTP/1.1

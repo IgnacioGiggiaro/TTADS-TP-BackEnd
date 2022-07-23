@@ -27,6 +27,7 @@ app.use(session({
     resave:true,
     saveUninitialized:true
 }));
+app.use(express.json());
 //Global Variables
 
 //Routes
