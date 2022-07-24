@@ -3,10 +3,10 @@ const controller = require('../controllers/Professional')
 
 const router = express.Router();
 
-router.get('/', controller.getProf);
-router.get('/:id/', controller.getProfByID);
-router.post('/', controller.createProf);
-router.delete('/:id/', controller.deleteProf);
-router.put('/:id/', controller.updateProf);
+router.get('/ProfessionalGet', controller.getProfessional);
+router.get('/ProfessionalGet/:id/', controller.getProfessionalByID);
+router.post('/ProfessionalCreate', controller.createProfessional);
+router.delete('/ProfessionalDelete/:id/', controller.deleteProfessional);
+router.put('/ProfessionalUpdate/:id', controller.updateProfessional);
 
 module.exports= router;

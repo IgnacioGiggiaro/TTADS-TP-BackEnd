@@ -1,4 +1,4 @@
-###
+###ObraSocial
 POST http://localhost:3000/ObraSocialCreate
 Content-Type: application/json
 
@@ -16,4 +16,63 @@ PUT http://localhost:3000/ObraSocialUpdate/62db147cf2ebd3bf2140334d HTTP/1.1
 Content-Type: application/json
 
 {"nombre": "Osde"
+}
+
+###Paciente
+POST http://localhost:3000/PacienteCreate
+Content-Type: application/json
+
+{"dni": "40258741",
+  "nombre": "Ricardo",
+  "apellido": "Ruben",
+  "telefono": "3411236478",
+  "mail": "ricardoruben1978@gmail.com",
+  "direccion": "Italia 90",
+  "fecha_nac": "10/08/1960"
+}
+
+###
+GET http://localhost:3000/PacienteGet/62ddcbcf5470143287a95ad2 HTTP/1.1
+
+###
+GET http://localhost:3000/PacienteGet HTTP/1.1
+
+###
+DELETE http://localhost:3000/PacienteDelete/62ddcbcf5470143287a95ad2 HTTP/1.1
+
+###
+PUT http://localhost:3000/PacienteUpdate/62db0b38e6119b7cb7a3a33d HTTP/1.1
+Content-Type: application/json
+
+{"nombre": "Pedro"
+}
+
+###Professional
+
+POST http://localhost:3000/ProfessionalCreate
+Content-Type: application/json
+
+{"dni": "40258741",
+  "nombre": "Ricardo",
+  "apellido": "Ruben",
+  "telefono": "3411236478",
+  "mail": "ricardoruben1978@gmail.com",
+  "direccion": "Italia 90",
+  "fecha_nac": "10/08/1960"
+}
+
+###
+GET http://localhost:3000/ProfessionalGet/62ddd2dae9d72b8e4c2e69ec HTTP/1.1
+
+###
+GET http://localhost:3000/ProfessionalGet HTTP/1.1
+
+###
+DELETE http://localhost:3000/ProfessionalDelete/62ddd2dae9d72b8e4c2e69ec HTTP/1.1
+
+###
+PUT http://localhost:3000/ProfessionalUpdate/62ddd35a51e7167ee3eb0215 HTTP/1.1
+Content-Type: application/json
+
+{"nombre": "Mago"
 }
