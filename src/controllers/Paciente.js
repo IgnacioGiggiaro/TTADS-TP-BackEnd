@@ -18,7 +18,7 @@ const pacienteController = {
         } catch (error){
             return res
                 .status(500)
-                .send({ success: false, message: error})
+                .send({ success: false, message: 'Error creating Paciente'})
         }
     },
 
