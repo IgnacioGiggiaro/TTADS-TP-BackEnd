@@ -24,7 +24,7 @@ const professionalController = {
 
     createProfessional: async (req, res) =>{
         try {
-                const newProfessional= new professional({
+                const newProfessional= new Professional({
                     dni : req.body.dni,
                     nombre: req.body.nombre,
                     apellido: req.body.apellido,
@@ -47,7 +47,7 @@ const professionalController = {
             if (!removedProfessional) return res.status(404).send({message: 'There is no Professional with ID: ${req.params.id}' });
             return res.send({message: 'Professional deleted successfully'})
         } catch {
-            return res.status(500).send({message: 'Error deleting category'})
+            return res.status(500).send({message: 'Error deleting Professional'})
         }
     },
 
@@ -70,7 +70,54 @@ const professionalController = {
         } catch {
             return res.status(503).send({message: 'error updating Professional'})
         }
-    }
+    },
+    addSchedule: async (req, res) => {
+        const professionalId = req.params.id;
+
+        const professional = await Professional.findById(professionalId);
+        if (!professional) {
+            return res.status(404).send({ message: 'Professional not found' });
+        }
+
+        if (professional.schedules.indexOf(req.body.schedulesId) === 0) {
+            professional.schedules.push(req.body.schedulesId);
+        }
+
+        const updatedProfessional = await Professional.findByIdAndUpdate(professionalId, professional, {
+            new: true,
+        });
+
+        if (!updatedProfessional) {
+            return res.status(500).send({ message: 'Error trying to add Schedule' });
+        }
+
+        return res.send({ message: 'Professional updated successfully' });
+    },
+    removeSchedule: async (req, res) => {
+        const professionalId = req.params.id;
+
+        const professional = await Professional.findById(professionalId);
+        if (!professional) {
+            return res.status(404).send({ message: 'Profesional not found' });
+        }
+
+        const { scheduleId } = req.body;
+        const index = professional.schedules.indexOf(scheduleId);
+        if (index === -1) {
+            return res.status(404).send({ message: 'Schedule not found' });
+        }
+        professional.schedules.splice(index, 1);
+
+        const updateProfessional = await Professional.findByIdAndUpdate(professionalId, professional, {
+            new: true,
+        });
+
+        if (!updateProfessional) {
+            return res.status(500).send({ message: 'Error trying to remove Schedule' });
+        }
+
+        return res.send({ message: 'Professional updated successfully' });
+    },
 }
 
 module.exports= professionalController;

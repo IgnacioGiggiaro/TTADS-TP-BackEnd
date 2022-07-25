@@ -12,7 +12,7 @@ const ProfessionalSchema = new Schema({
     mail:{type:String, required:true},
     direccion: {type:String, required:true},
     fecha_nac: {type:Date, required:true},
-    schedule:{ type: mongoose.SchemaTypes.ObjectId, ref: 'Schedule',required:false}
+    schedules:{ type: [mongoose.SchemaTypes.ObjectId],required:false}
 });
 
 module.exports=mongoose.model('Professional', ProfessionalSchema)
