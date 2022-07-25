@@ -79,12 +79,13 @@ const professionalController = {
             return res.status(404).send({ message: 'Professional not found' });
         }
 
-        if (professional.schedules.indexOf(req.body.schedulesId) === 0) {
+        if (professional.schedules.indexOf(req.body.schedulesId) === -1) {
             professional.schedules.push(req.body.schedulesId);
         }
 
         const updatedProfessional = await Professional.findByIdAndUpdate(professionalId, professional, {
             new: true,
+            //returnOriginal:false
         });
 
         if (!updatedProfessional) {
