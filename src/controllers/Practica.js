@@ -8,7 +8,7 @@ const practicaController = {
             });
             await newPractica.save();
             return res.status(200).send({success:true, newPractica});
-        } catch (err){
+        } catch {
             return res
                 .status(500)
                 .send({ success: false, message: 'Error creating practica'})
