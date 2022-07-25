@@ -1,14 +1,18 @@
 const express = require('express');
+const obraSocial = require('./ObraSocial');
+const paciente = require('./Paciente');
+const profesional = require('./Professional');
+const schedule = require('./Schedule');
+const turno = require('./Turno');
+
+
 const router = express.Router();
 
-router.get('/',(req, res) => {
-    res.send('index');
+router.use('/ObraSocial', obraSocial);
+router.use('/Paciente', paciente);
+router.use('/Professional', profesional);
+router.use('/Schedule', schedule);
+router.use('/Turno', turno);
 
-});
-
-router.get('/about', (req, res)=>{
-    res.send('About')
-
-})
 
 module.exports = router;
