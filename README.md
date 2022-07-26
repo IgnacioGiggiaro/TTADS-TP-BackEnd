@@ -10,7 +10,7 @@ ABMC Complejo: Profesional, Turno
 
 Listado simple: Obra sociales, Prácticas
 
-Listado complejo: Profesional por Obra Social, Profesional por Especialidad
+Listado complejo: Profesional por Obra Social, Turno por Paciente
 
 Detalle: Profesional
 
