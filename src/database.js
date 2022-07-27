@@ -10,8 +10,8 @@ mongoose.connect('mongodb://localhost/notes-db-app', {
     .catch(err => console.error(err));
 
  */
-mongoose.connect('mongodb://localhost/hospital-db-app',
+mongoose.connect('mongodb+srv://admin:admin@hospital-db.gpzdy.mongodb.net/?retryWrites=true&w=majority',
     err => {
         if(err) throw err;
-        console.log('connected to MongoDB')
+        console.log('connected to MongoDB Remotely')
     });
