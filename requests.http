@@ -126,10 +126,11 @@ POST http://localhost:3000/Turno
 Content-Type: application/json
 
 {"dia": "2022-07-25T03:00:00.000+00:00",
-  "paciente": "62db0a2c5ef4fa2a64e1274d",
-  "obraSocial": "62df22eba1bbfaf6e6b04c85",
-  "professional": "62df2308a1bbfaf6e6b04c87",
-  "practica": "62df281490591dc90b586dd7"
+  "paciente": "62d86b06a04c9d6fada75a44",
+  "obraSocial": "62f6d2f3309c35b5729c1475",
+  "professional": "62f6d351309c35b5729c1477",
+  "practica": "62f6d38c309c35b5729c1479",
+
 }
 
 ###
