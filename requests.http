@@ -91,7 +91,7 @@ DELETE http://localhost:3000/ProfessionalDeleteSchedule/62ddd265e9d72b8e4c2e69ea
 Content-Type: application/json
 
 {
-  "schedulesId": "62ddead4cbbeab31740bc05d"
+  "schedulesId": "62ddead21b94961800ae4f1d"
 }
 
 ###Schedule
@@ -100,8 +100,9 @@ POST http://localhost:3000/Schedule HTTP/1.1
 Content-Type: application/json
 
 {
-  "hsDesde": "2022-07-24T14:30:00.000+00:00",
-  "hsHasta": "2022-07-24T16:30:00.000+00:00"
+  "dia": ["1", "2", "3", "4", "5"],
+  "hsDesde": ["14.5","","14.5","","14.5"],
+  "hsHasta": ["16.5","","16.5","","16.5"]
 }
 
 ###
@@ -111,7 +112,7 @@ GET http://localhost:3000/Schedule/62df2c19a5affd3a5d814661 HTTP/1.1
 GET http://localhost:3000/Schedule HTTP/1.1
 
 ###
-DELETE http://localhost:3000/Schedule/62df2c19a5affd3a5d814661 HTTP/1.1
+DELETE http://localhost:3000/Schedule/62ddead4cbbeab31740bc05d HTTP/1.1
 
 ###
 PUT http://localhost:3000/Schedule/62df2c19a5affd3a5d814661 HTTP/1.1
@@ -122,14 +123,16 @@ Content-Type: application/json
 
 ###Turno
 
-POST http://localhost:3000/Turno
+POST http://localhost:3000/Turno HTTP/1.1
 Content-Type: application/json
 
-{"dia": "2022-07-25T03:00:00.000+00:00",
-  "paciente": "62db0a2c5ef4fa2a64e1274d",
-  "obraSocial": "62df22eba1bbfaf6e6b04c85",
-  "professional": "62df2308a1bbfaf6e6b04c87",
-  "practica": "62df281490591dc90b586dd7"
+{
+  "dia": "1",
+  "paciente": "62ab0c9641bdffb779861d5b",
+  "obraSocial": "62dc6b30294deeae93787cef",
+  "professional": "62ddd35a51e7167ee3eb0215",
+  "practica": "62f6cd459671f1694b1feb71",
+  "hsDesde": "14.5"
 }
 
 ###
