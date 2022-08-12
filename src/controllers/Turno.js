@@ -30,12 +30,15 @@ const turnoController = {
                 obraSocial: req.body.obraSocial,
                 professional: req.body.professional,
                 practica: req.body.practica,
+                hsDesde:req.body.hsDesde,
+                hsHasta:req.body.hsDesde+0.25
 
             });
             await newTurno.save();
             return res.status(200).send({success:true, newTurno});
         }catch {
-            return res.status(503).send({message: 'Error creating a Turno'})
+
+            return res.status(503).send({message: 'Error creating Turno' })
         }
     },
 
