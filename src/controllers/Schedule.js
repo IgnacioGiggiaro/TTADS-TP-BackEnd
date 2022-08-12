@@ -25,9 +25,10 @@ const scheduleController = {
     createSchedule: async (req, res) =>{
         try {
             const newSchedule = new Schedule({
+                dia : req.body.dia,
                 hsDesde : req.body.hsDesde,
                 hsHasta: req.body.hsHasta,
-                state: true
+                state: [true, true, true, true, true]
             });
             await newSchedule.save();
             return res.status(200).send({success:true, newSchedule});
