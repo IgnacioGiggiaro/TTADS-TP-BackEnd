@@ -1,5 +1,4 @@
 const Turno = require ('../models/Turno');
-
 const turnoController = {
     getTurno: async (req, res) => {
         try {
@@ -31,14 +30,15 @@ const turnoController = {
                 professional: req.body.professional,
                 practica: req.body.practica,
                 hsDesde:req.body.hsDesde,
-                hsHasta:req.body.hsDesde+0.25
+                hsHasta:Number(req.body.hsDesde)+0.25
 
             });
             await newTurno.save();
+            console.log(`objeto añadido: ${JSON.stringify(newTurno)}`);
             return res.status(200).send({success:true, newTurno});
-        }catch {
+        }catch (err) {
 
-            return res.status(503).send({message: 'Error creating Turno' })
+            return res.status(503).send({message: err })
         }
     },
 
@@ -61,12 +61,16 @@ const turnoController = {
                     paciente: req.body.paciente,
                     obraSocial: req.body.obraSocial,
                     professional: req.body.professional,
-                    practica: req.body.practica,},
+                    practica: req.body.practica,
+                    hsDesde:req.body.hsDesde,
+                    hsHasta:Number(req.body.hsDesde)+0.25
+                },
             ).exec();
 
             if (!updatedTurno) return res.status(404).send ({message: `There is no Turno with Id: ${req.params.id} `});
 
             return res.send({message: "Turno updated successfully"});
+
         } catch {
             return res.status(503).send({message: 'error updating Turno'})
         }
