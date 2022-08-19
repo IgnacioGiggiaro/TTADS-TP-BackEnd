@@ -25,7 +25,11 @@ const pacienteController = {
     getPacientes: async (req, res) => {
         try{
             const paciente = await Paciente.find({}).exec();
-            return res.status(200).send({ success: true, paciente});
+            //res.json(paciente)
+            return res
+                .status(200)
+                //.send({ success: true})
+                .json(paciente);
         }catch (error){
             return res
                 .status(500)
