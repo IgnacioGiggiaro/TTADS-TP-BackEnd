@@ -2,8 +2,8 @@ const Turno = require ('../models/Turno');
 const turnoController = {
     getTurno: async (req, res) => {
         try {
-            const turno= await Turno.find({}).exec();
-            return res.status(200).send({success: true, turno})
+            const turnos= await Turno.find({}).exec();
+            return res.status(200).json(turnos);
         }catch (err){
             return res.status(503).send({success: false, postMessage: 'Error finding Turnos'});
         }

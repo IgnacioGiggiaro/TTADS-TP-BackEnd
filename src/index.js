@@ -1,3 +1,4 @@
+const cors= require('cors');
 const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
@@ -7,6 +8,7 @@ const morgan = require('morgan');
 //Initialiazations
 const app = express();
 require('./database');
+app.use(cors())
 app.use(morgan('tiny'));
 
 //Settings

@@ -3,8 +3,8 @@ const Schedule = require ('../models/Schedule');
 const scheduleController = {
     getSchedule: async (req, res) => {
         try {
-            const schedule = await Schedule.find({}).exec();
-            return res.status(200).send({success: true, schedule})
+            const schedules = await Schedule.find({}).exec();
+            return res.status(200).json(schedules)
         }catch (err){
             return res.status(503).send({success: false, postMessage: 'Error finding Schedule'});
         }

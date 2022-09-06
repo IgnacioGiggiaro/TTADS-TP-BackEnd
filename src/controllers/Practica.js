@@ -17,8 +17,8 @@ const practicaController = {
 
     getPractica: async (req, res) => {
         try{
-            const practica = await Practica.find({}).exec();
-            return res.status(200).send({ success: true, practica});
+            const practicas = await Practica.find({}).exec();
+            return res.status(200).json(practicas);
         }catch (err){
             return res
                 .status(500)

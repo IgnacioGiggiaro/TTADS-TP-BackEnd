@@ -4,7 +4,7 @@ const professionalController = {
     getProfessional: async (req, res) => {
         try {
             const professional= await Professional.find({}).exec();
-            return res.status(200).send({success: true, professional})
+            return res.status(200).json(professional)
         }catch (err){
              return res.status(503).send({success: false, postMessage: 'Error finding Professionals'});
         }
