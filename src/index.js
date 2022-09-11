@@ -4,11 +4,13 @@ const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const session = require('express-session');
 const morgan = require('morgan');
+const cors = require('cors');
+const moment = require('moment');
 //Initialiazations
 const app = express();
 require('./database');
 app.use(morgan('tiny'));
-
+app.use(cors())
 //Settings
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));

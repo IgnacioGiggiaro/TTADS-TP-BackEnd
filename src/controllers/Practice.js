@@ -1,4 +1,4 @@
-const Practica = require('../models/Practica');
+const Practica = require('../models/Practice');
 
 const practicaController = {
     createPractica: async (req, res) => {
@@ -18,7 +18,9 @@ const practicaController = {
     getPractica: async (req, res) => {
         try{
             const practica = await Practica.find({}).exec();
-            return res.status(200).send({ success: true, practica});
+            return res
+                .status(200)
+                .json(practica);
         }catch (err){
             return res
                 .status(500)

@@ -30,7 +30,7 @@ const turnoController = {
                 professional: req.body.professional,
                 practica: req.body.practica,
                 hsDesde:req.body.hsDesde,
-                hsHasta:Number(req.body.hsDesde)+0.25
+                //hsHasta:Number(req.body.hsDesde)+0.25
 
             });
             await newTurno.save();
@@ -74,6 +74,18 @@ const turnoController = {
         } catch {
             return res.status(503).send({message: 'error updating Turno'})
         }
-    }
+    },
+    async getTurnoByPD(idProf, date){
+        try {
+            const turnos = await Turno.find({professional:idProf},{"dia":1,"hsDesde":1,"_id":1}).find({dia:date});
+            console.log(`hsDesde: ${JSON.stringify(turnos[0].hsDesde)}`);
+            return (turnos);
+        }
+        catch {
+
+        }
+    },
+
+
 }
    module.exports=turnoController;
