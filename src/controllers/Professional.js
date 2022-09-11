@@ -142,6 +142,7 @@ const professionalController = {
             const dateString = moment(date).format("dddd");
             console.log(`DateString: ${JSON.stringify(dateString)}`);
             const schedule = await Professional.findOne({_id: professionalId}).populate('schedules', 'dia');
+            console.log(`Schedule: ${JSON.stringify(schedule)}`);
             const sche = await Schedule.findOne({'_id':schedule.schedules,'dia':dateString,'state':true});
             console.log(`Schedule: ${JSON.stringify(sche.dia)}`);
             var cont = sche.hsDesde;
@@ -156,10 +157,12 @@ const professionalController = {
             for(x of hsDesde) {
                 console.log(x.hsDesde)
             };
-            const result = professionalController.getDifference(time,hsDesde);
-            if(!result) return res.status(503).send({message:'No hay turnos para ese profesional ese dia'});
-            console.log(result);
-            return res.status(200).json(result)
+            for(x of hsDesde){
+                time = time.filter(t=> t!==x.hsDesde)
+            }
+            if(!time) return res.status(503).send({message:'No hay turnos para ese profesional ese dia'});
+            console.log(time);
+            return res.status(200).json(time)
         } catch(error) {
             console.error(error);
             return res.status(500).send({message:"Error searching Turnos"});
@@ -172,11 +175,7 @@ const professionalController = {
 
 
         },
-    async getDifference(a, b) {
-    return a.filter(element=>{
-        return !b.includes(element)
-    });
-    },
+
     // prueba: async (req,res) =>{
     //     try {
     //         const result= await turnoController.getTurnoByPD("62f6cce99671f1694b1feb6e", "09-12-2022");
