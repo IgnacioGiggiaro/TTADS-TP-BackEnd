@@ -5,9 +5,13 @@ const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const session = require('express-session');
 const morgan = require('morgan');
+const conect = require('./database');
+
 //Initialiazations
 const app = express();
-require('./database');
+//require('./database');
+
+conect();
 app.use(cors())
 app.use(morgan('tiny'));
 
@@ -34,11 +38,7 @@ app.use(express.json());
 
 //Routes
 app.use(require('./routes/Index'));
-app.use(require('./routes/Paciente'));
-app.use(require('./routes/Professional'));
-app.use(require('./routes/Schedule'));
-app.use(require('./routes/Turno'));
-app.use(require('./routes/obraSocial'));
+
 //Static Files
 app.use(express.static(path.join(__dirname,'public')));
 //Server is listenning

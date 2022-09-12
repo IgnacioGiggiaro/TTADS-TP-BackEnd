@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/hospital-db-app',
-    err => {
-        if(err) throw err;
-        console.log('connected to MongoDB')
-    });
+module.exports = async function conect() {
+    try{
+        await mongoose.connect('mongodb://localhost/hospital-db-app');
+        console.log ("Conectado :D ");
+    } catch (error){
+        console.log (error);
+        console.log ("No se conecto :( ")
+    }
+}

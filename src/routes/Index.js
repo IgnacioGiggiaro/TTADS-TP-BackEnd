@@ -1,5 +1,5 @@
 const express = require('express');
-const obraSocial = require('./ObraSocial');
+const obraSocial = require('./obraSocial');
 const paciente = require('./Paciente');
 const profesional = require('./Professional');
 const schedule = require('./Schedule');
