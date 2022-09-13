@@ -132,12 +132,12 @@ const professionalController = {
     retrieveProfessional: async (req, res) =>{
         try {
             const professionalId = req.params.id;
-            const date = req.body.date;
+            const date = req.params.fecha;
             const professional = await Professional.findById(professionalId);
             console.log(`Professional: ${JSON.stringify(professional)}`);
             console.log(`DATE: ${JSON.stringify(date)}`);
             if (!professional) {
-                return res.status(404).send({ message: 'Profesional not found' });
+                return res.status(504).send({ message: 'Profesional not found' });
             }
             const dateString = moment(date).format("dddd");
             console.log(`DateString: ${JSON.stringify(dateString)}`);

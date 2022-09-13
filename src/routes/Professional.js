@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', controller.getProfessional);
 router.get('/:id/', controller.getProfessionalByID);
-router.get('/:id/r', controller.retrieveProfessional);
+router.get('/:id/:fecha', controller.retrieveProfessional);
 // router.get('/p', controller.prueba);
 router.post('/', controller.createProfessional);
 router.delete('/:id/', controller.deleteProfessional);
