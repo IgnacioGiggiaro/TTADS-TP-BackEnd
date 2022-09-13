@@ -154,12 +154,15 @@ const professionalController = {
             }
             let hsDesde = await turnoController.getTurnoByPD(req.params.id, date);
             console.log(`hsDesde: ${JSON.stringify(hsDesde)}`);
-            for(x of hsDesde) {
-                console.log(x.hsDesde)
-            };
-            for(x of hsDesde){
-                time = time.filter(t=> t!==x.hsDesde)
+            if(hsDesde){
+                for(x of hsDesde) {
+                    console.log(x.hsDesde)
+                };
+                for(x of hsDesde){
+                    time = time.filter(t=> t!==x.hsDesde)
+                }
             }
+
             if(!time) return res.status(503).send({message:'No hay turnos para ese profesional ese dia'});
             console.log(time);
             return res.status(200).json(time)
