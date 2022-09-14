@@ -18,7 +18,9 @@ const obraSocialController = {
     getObraSociales: async (req, res) => {
         try{
             const obraSocial = await ObraSocial.find({}).exec();
-            return res.status(200).send({ success: true, obraSocial});
+            return res
+                .status(200)
+                .json( obraSocial);
         }catch (error){
             return res
                 .status(500)
