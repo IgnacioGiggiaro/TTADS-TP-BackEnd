@@ -1,3 +1,4 @@
+/*
 const validator = require('validator');
 const mongoose = require('mongoose');
 const { Paciente, ObraSocial, Professional, Practica } = require('../models/index');
@@ -56,3 +57,4 @@ const verificacionTurno = async (req, res, next) => {
 };
 
 module.exports = verificacionTurno;
+*/
