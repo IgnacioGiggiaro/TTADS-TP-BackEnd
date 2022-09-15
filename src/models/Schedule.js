@@ -5,10 +5,10 @@ const { Schema }=mongoose;
 
 
 const ScheduleSchema = new Schema({
-    dia:{type:[Number], required:true},
-    hsDesde:{type:[Number], required:true},
-    hsHasta:{type:[Number], required:true},
-    state:{type:[Boolean], required:true},
+    dia:{type:String, required:true},
+    hsDesde:{type:Number, required:true},
+    hsHasta:{type:Number, required:true},
+    state:{type:Boolean, required:true},
 });
 
 module.exports=mongoose.model('Schedule', ScheduleSchema)

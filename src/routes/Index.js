@@ -4,7 +4,7 @@ const paciente = require('./Paciente');
 const profesional = require('./Professional');
 const schedule = require('./Schedule');
 const turno = require('./Turno');
-const practica = require('./Practica');
+const practica = require('./Practice');
 
 
 const router = express.Router();
