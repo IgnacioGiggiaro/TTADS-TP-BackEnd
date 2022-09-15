@@ -1,4 +1,4 @@
-const Practica = require('../models/Practica');
+const Practica = require('../models/Practice');
 
 const practicaController = {
     createPractica: async (req, res) => {
