@@ -11,7 +11,7 @@ const conect = require('./database');
 
 //Initialiazations
 const app = express();
-//require('./database');
+require('./database');
 
 conect();
 app.use(cors())
