@@ -3,7 +3,7 @@ const {turnoController} = require("./Index");
 const {Turno} = require("../models");
 const {Schedule}=require("../models");
 const moment = require("moment");
-const {Turn} = require ("../models")
+const Turn = require ("../models/Turn")
 
 const professionalController = {
     getProfessional: async (req, res) => {
@@ -156,28 +156,31 @@ const professionalController = {
 
             while (cont <= (sche.hsHasta - 0.25)) {
                 console.log(`Cont: ${JSON.stringify(cont)}`);
-                const turn = new Turn(cont, false);
+                let turn = new Turn();
+                turn.hora = cont;
+                turn.busy=false;
                 turns.push(turn);
                 cont = cont + 0.25;
             }
 
-            let hsDesde = await turnoController.getTurnoByPD(req.params.id, date);
-            console.log(`hsDesde: ${JSON.stringify(hsDesde)}`);
-
-            if (hsDesde) {
-                for (let x of hsDesde) {
+            let turnosByPD= await turnoController.getTurnoByPD(req.params.id, date);
+            console.log(`TurnosByPD: ${JSON.stringify(turnosByPD)}`);
+            let allTurns = [];
+            if (turnosByPD) {
+                for (let x of turnosByPD) {
                     console.log(x.hsDesde);
-
-                    turns = turns.map(turn => {
-                        if (turn.hora === x.hsDesde) {
-                            turn.busy = true;
+                    for(let t of turns){
+                        if (t.hora===x.hsDesde){
+                            t.busy=true;
                         }
-                    });
+                    }
                 }
             }
+
             if (!turns.length) {
                 return res.status(503).send({ message: 'No hay turnos para ese profesional ese día' });
             }
+
             console.log(turns);
             return res.status(200).json(turns);
         } catch (error) {
@@ -185,7 +188,6 @@ const professionalController = {
             return res.status(500).send({ message: 'Error searching Turnos' });
         }
     },
-
 }
 
 module.exports= professionalController;
