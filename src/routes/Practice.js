@@ -1,5 +1,5 @@
 const express = require('express');
-const controller = require('../controllers/Practica');
+const controller = require('../controllers/Practice');
 const router = express.Router();
 
 router.get('/:id/', controller.getPracticaById);

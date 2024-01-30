@@ -60,7 +60,15 @@ Content-Type: application/json
   "direccion": "Italia 90",
   "fecha_nac": "10/08/1960"
 }
+###
+GET http://localhost:3000/Professional/62f6cce99671f1694b1feb6e/r HTTP/1.1
+Content-Type: application/json
 
+{"date": "09/12/22"
+}
+
+###
+GET http://localhost:3000/Professional/p HTTP/1.1
 ###
 GET http://localhost:3000/Professional/62ddd2dae9d72b8e4c2e69ec HTTP/1.1
 
@@ -68,7 +76,7 @@ GET http://localhost:3000/Professional/62ddd2dae9d72b8e4c2e69ec HTTP/1.1
 GET http://localhost:3000/Professional HTTP/1.1
 
 ###
-DELETE http://localhost:3000/Professional/62ddd2dae9d72b8e4c2e69ec HTTP/1.1
+DELETE http://localhost:3000/Professional/62ddd35a51e7167ee3eb0215 HTTP/1.1
 
 ###
 PUT http://localhost:3000/Professional/62ddd35a51e7167ee3eb0215 HTTP/1.1
@@ -78,11 +86,11 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/ProfessionalAddSchedule/62ddd265e9d72b8e4c2e69ea HTTP/1.1
+POST http://localhost:3000/ProfessionalAddSchedule/62f6cce99671f1694b1feb6e HTTP/1.1
 Content-Type: application/json
 
 {
-"schedulesId": "62ddead21b94961800ae4f1d"
+"schedulesId": "631e1f5f5b87440733e787ac"
 }
 
 ###
@@ -100,9 +108,9 @@ POST http://localhost:3000/Schedule HTTP/1.1
 Content-Type: application/json
 
 {
-  "dia": ["1", "2", "3", "4", "5"],
-  "hsDesde": ["14.5","","14.5","","14.5"],
-  "hsHasta": ["16.5","","16.5","","16.5"]
+  "dia": "Tuesday",
+  "hsDesde": "15",
+  "hsHasta": "18"
 }
 
 ###
@@ -112,7 +120,7 @@ GET http://localhost:3000/Schedule/62df2c19a5affd3a5d814661 HTTP/1.1
 GET http://localhost:3000/Schedule HTTP/1.1
 
 ###
-DELETE http://localhost:3000/Schedule/62ddead4cbbeab31740bc05d HTTP/1.1
+DELETE http://localhost:3000/Schedule/62f6cab1917eb5c7d892fb00 HTTP/1.1
 
 ###
 PUT http://localhost:3000/Schedule/62df2c19a5affd3a5d814661 HTTP/1.1
@@ -127,10 +135,10 @@ POST http://localhost:3000/Turno HTTP/1.1
 Content-Type: application/json
 
 {
-  "dia": "1",
+  "dia": "09-12-2022",
   "paciente": "62ab0c9641bdffb779861d5b",
   "obraSocial": "62dc6b30294deeae93787cef",
-  "professional": "62ddd35a51e7167ee3eb0215",
+  "professional": "62f6cce99671f1694b1feb6e",
   "practica": "62f6cd459671f1694b1feb71",
   "hsDesde": "14.5"
 }
@@ -142,7 +150,7 @@ GET http://localhost:3000/Turno HTTP/1.1
 GET http://localhost:3000/Turno/62df283590591dc90b586dd9 HTTP/1.1
 
 ###
-DELETE http://localhost:3000/Turno/62df233ea1bbfaf6e6b04c89 HTTP/1.1
+DELETE http://localhost:3000/Turno/62f900de396c7ef99ed6b367 HTTP/1.1
 
 ###
 PUT http://localhost:3000/Turno/62df283590591dc90b586dd9 HTTP/1.1
