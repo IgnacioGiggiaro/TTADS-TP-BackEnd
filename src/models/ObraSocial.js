@@ -6,7 +6,8 @@ const { Schema }=mongoose;
 
 
 const ObraSocialSchema = new Schema({
-    nombre : { type: String, required:true}
+    nombre : { type: String, required:true},
+    imgURL: {type: String, required:true}
 });
 
 
