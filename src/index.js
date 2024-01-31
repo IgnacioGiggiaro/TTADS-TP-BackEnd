@@ -6,14 +6,28 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 const morgan = require('morgan');
 const conect = require('./database');
+//const { auth } = require('express-oauth2-jwt-bearer');
+
 
 //Initialiazations
 const app = express();
-//require('./database');
+require('./database');
 
 conect();
 app.use(cors())
 app.use(morgan('tiny'));
+
+
+//const jwtCheck = auth({
+//    secret: 'b4pnK8xyYvCvb17QfLImkoNyCrYcsHgr',
+//    audience: 'http://localhost:3001/',
+//    issuerBaseURL: 'https://dev-h5ly1w0dacya3m3n.us.auth0.com/',
+//    tokenSigningAlg: 'HS256'
+//});
+
+// enforce on all endpoints
+//app.use(jwtCheck);
+// enforce on all endpoints
 
 //Settings
 app.set('port', process.env.PORT || 3000);

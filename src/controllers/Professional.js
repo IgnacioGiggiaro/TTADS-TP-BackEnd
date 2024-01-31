@@ -3,6 +3,7 @@ const {turnoController} = require("./Index");
 const {Turno} = require("../models");
 const {Schedule}=require("../models");
 const moment = require("moment");
+const Turn = require ("../models/Turn")
 
 const professionalController = {
     getProfessional: async (req, res) => {
@@ -129,70 +130,64 @@ const professionalController = {
 
         return res.send({ message: 'Professional updated successfully' });
     },
-    retrieveProfessional: async (req, res) =>{
+    retrieveProfessional: async (req, res) => {
         try {
             const professionalId = req.params.id;
             const date = req.params.fecha;
+
             const professional = await Professional.findById(professionalId);
             console.log(`Professional: ${JSON.stringify(professional)}`);
-            console.log(`DATE: ${JSON.stringify(date)}`);
+
             if (!professional) {
-                return res.status(504).send({ message: 'Profesional not found' });
+                return res.status(404).send({ message: 'Professional not found' });
             }
-            const dateString = moment(date).format("dddd");
+
+            const dateString = moment(date).format('dddd');
             console.log(`DateString: ${JSON.stringify(dateString)}`);
-            const schedule = await Professional.findOne({_id: professionalId}).populate('schedules', 'dia');
+
+            const schedule = await Professional.findOne({ _id: professionalId }).populate('schedules', 'dia');
             console.log(`Schedule: ${JSON.stringify(schedule)}`);
-            const sche = await Schedule.findOne({'_id':schedule.schedules,'dia':dateString,'state':true});
+
+            const sche = await Schedule.findOne({ '_id': schedule.schedules, 'dia': dateString, 'state': true });
             console.log(`Schedule: ${JSON.stringify(sche.dia)}`);
+
             var cont = sche.hsDesde;
-            let time=[];
-            while (cont<=(sche.hsHasta-0.25)) {
+            let turns = [];
+
+            while (cont <= (sche.hsHasta - 0.25)) {
                 console.log(`Cont: ${JSON.stringify(cont)}`);
-                time.push(cont);
-                cont=cont+0.25;
+                let turn = new Turn();
+                turn.hora = cont;
+                turn.busy=false;
+                turns.push(turn);
+                cont = cont + 0.25;
             }
-            let hsDesde = await turnoController.getTurnoByPD(req.params.id, date);
-            console.log(`hsDesde: ${JSON.stringify(hsDesde)}`);
-            if(hsDesde){
-                for(x of hsDesde) {
-                    console.log(x.hsDesde)
-                };
-                for(x of hsDesde){
-                    time = time.filter(t=> t!==x.hsDesde)
+
+            let turnosByPD= await turnoController.getTurnoByPD(req.params.id, date);
+            console.log(`TurnosByPD: ${JSON.stringify(turnosByPD)}`);
+            let allTurns = [];
+            if (turnosByPD) {
+                for (let x of turnosByPD) {
+                    console.log(x.hsDesde);
+                    for(let t of turns){
+                        if (t.hora===x.hsDesde){
+                            t.busy=true;
+                        }
+                    }
                 }
             }
 
-            if(!time) return res.status(503).send({message:'No hay turnos para ese profesional ese dia'});
-            console.log(time);
-            return res.status(200).json(time)
-        } catch(error) {
+            if (!turns.length) {
+                return res.status(503).send({ message: 'No hay turnos para ese profesional ese día' });
+            }
+
+            console.log(turns);
+            return res.status(200).json(turns);
+        } catch (error) {
             console.error(error);
-            return res.status(500).send({message:"Error searching Turnos"});
-
-
-
+            return res.status(500).send({ message: 'Error searching Turnos' });
         }
-
-
-
-
-        },
-
-    // prueba: async (req,res) =>{
-    //     try {
-    //         const result= await turnoController.getTurnoByPD("62f6cce99671f1694b1feb6e", "09-12-2022");
-    //         return res
-    //             .status(200)
-    //             .json(result)
-    //     }catch (err){
-    //         return res
-    //             .status(503)
-    //             .send(err);
-    //     }
-    // }
-
-
+    },
 }
 
 module.exports= professionalController;

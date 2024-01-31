@@ -10,6 +10,6 @@ router.get('/:id/:fecha', controller.retrieveProfessional);
 router.post('/', controller.createProfessional);
 router.delete('/:id/', controller.deleteProfessional);
 router.put('/:id/', controller.updateProfessional);
-router.post('/ProfessionalAddSchedule/:id', controller.addSchedule);
-router.delete('/ProfessionalDeleteSchedule/:id', controller.removeSchedule);
+router.post('/Professional/:id/Schedule', controller.addSchedule);
+router.delete('/Professional/:id/Schedule', controller.removeSchedule);
 module.exports= router;
