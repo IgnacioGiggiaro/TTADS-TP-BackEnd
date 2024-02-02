@@ -38,6 +38,7 @@ const pacienteController = {
 
                     return res.status(200).json({
                         message: 'Auth succesful',
+                        master: paciente[0].master,
                         token: token
                     });
 
