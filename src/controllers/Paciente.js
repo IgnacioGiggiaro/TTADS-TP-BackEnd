@@ -1,17 +1,115 @@
 const Paciente = require('../models/Paciente');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const Console = require("console");
+
 
 const pacienteController = {
-    createPaciente: async (req, res) => {
-        try{
-            const newPaciente = new Paciente({
-                dni: req.body.dni,
-                nombre: req.body.nombre,
-                apellido: req.body.apellido,
-                telefono: req.body.telefono,
-                mail: req.body.mail,
-                direccion: req.body.direccion,
-                fecha_nac: req.body.fecha_nac
+    
+
+
+    logIn: async (req, res) =>{
+        Paciente.find({mail:req.body.mail})
+            .exec()
+            .then(paciente=>{
+                if(paciente.length < 1){
+                    return res.status(401).json({
+                        message: 'Auth failed <1'
+                    });
+                }
+                bcrypt.compare(req.body.password,paciente[0].password,(err,resp)=>{
+                    if(err || !resp){
+                        return res.status(401).json({
+                            message: 'Auth failed password'
+                        });
+                    }
+
+
+                    const token =  jwt.sign({
+                            mail: paciente[0].mail,
+                            userId: paciente[0]._id,
+                            master: paciente[0].master,
+                        },
+                        process.env.JWT_KEY,
+                        {
+                            expiresIn: "1h"
+                        });
+
+
+                    return res.status(200).json({
+                        message: 'Auth succesful',
+                        token: token
+                    });
+
+                });
+
+            })
+            .catch(err =>{
+                console.log(err);
+                res.status(500).json({
+                    error: err
+                })
             });
+    },
+    createPaciente: async (req, res) => {
+        try {
+            bcrypt.hash(req.body.password, 10, (err, hash) => {
+                if (err) {
+                    return res.status(500).json({
+                        error: err
+                    });
+                } else {
+                    const newPaciente = new Paciente({
+                        dni: req.body.dni,
+                        nombre: req.body.nombre,
+                        apellido: req.body.apellido,
+                        telefono: req.body.telefono,
+                        mail: req.body.mail,
+                        password: hash,
+                        direccion: req.body.direccion,
+                        fecha_nac: req.body.fecha_nac,
+                        master: "0"
+                    });
+
+                    newPaciente.save((err, savedPaciente) => {
+                        if (err) {
+                            return res.status(500).json({
+                                error: err
+                            });
+                        }
+                        return res.status(200).json(savedPaciente);
+                    });
+                }
+            });
+        } catch (error) {
+            return res.status(500).send({ success: false, message: 'Error creating Paciente' });
+        }
+    },
+
+
+
+   /* createPaciente: async (req, res) => {
+        try{
+            bcrypt.hash(req.body.password,10,(err,hash)=>{
+                    if(err){
+                        return res.status(500).json({
+                            error:err
+                        });
+                    }else{
+                            const newPaciente = new Paciente({
+                                dni: req.body.dni,
+                                nombre: req.body.nombre,
+                                apellido: req.body.apellido,
+                                telefono: req.body.telefono,
+                                mail: req.body.mail,
+                                password: hash,
+                                direccion: req.body.direccion,
+                                fecha_nac: req.body.fecha_nac
+
+                            });
+
+                        }})
+
 
             await newPaciente.save();
             return res.status(200).json(newPaciente)
@@ -21,6 +119,8 @@ const pacienteController = {
                 .send({ success: false, message: 'Error creating Paciente'})
         }
     },
+    */
+
 
     getPacientes: async (req, res) => {
         try{

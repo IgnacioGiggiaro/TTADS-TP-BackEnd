@@ -259,6 +259,34 @@ const professionalController = {
             return res.status(500).send({ message: 'Error searching Turnos' });
         }
     },
+    /*getSchedule: async (req, res) => {
+        try {
+            const professionalId = req.params.id;
+            //const date = req.params.fecha;
+
+            const professional = await Professional.findById(professionalId);
+            console.log(`Professional: ${JSON.stringify(professional)}`);
+
+            if (!professional) {
+                return res.status(404).send({ message: 'Professional not found' });
+            }
+
+            //const dateString = moment(date).format('dddd');
+            //console.log(`DateString: ${JSON.stringify(dateString)}`);
+
+            const schedule = await Professional.findOne({ _id: professionalId }).populate('schedules', 'dia');
+            console.log(`Schedule: ${JSON.stringify(schedule)}`);
+
+            const sche = await Schedule.find((schedule) => schedule._id === schedule.schedules);
+            console.log(`Schedule: ${JSON.stringify(sche)}`);
+
+            return res.status(200).json(sche);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).send({ message: 'Error searching Turnos' });
+        }
+    }*/
+
 }
 
 module.exports= professionalController;
