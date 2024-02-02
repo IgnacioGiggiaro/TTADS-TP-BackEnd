@@ -43,7 +43,9 @@ const professionalController = {
                     mail: req.body.mail,
                     direccion: req.body.direccion,
                     fecha_nac: req.body.fecha_nac,
-                    schedule: req.body.schedule
+                    schedule: req.body.schedule,
+                    obrasSociales: req.body.obrasSociales,
+                    practicas: req.body.practicas
                 });
                 await newProfessional.save();
                 return res.status(200).send({success:true, newProfessional});
@@ -72,7 +74,9 @@ const professionalController = {
                     mail: req.body.mail,
                     direccion: req.body.direccion,
                     fecha_nac: req.body.fecha_nac,
-                    schedule: req.body.schedule}
+                    schedule: req.body.schedule,
+                    obrasSociales: req.body.obrasSociales,
+                    practicas: req.body.practicas}
             ).exec();
 
             if (!updatedProfessional) return res.status(404).send ({message: `There is no Professional with Id: ${req.params.id} `});
@@ -126,6 +130,77 @@ const professionalController = {
 
         if (!updateProfessional) {
             return res.status(500).send({ message: 'Error trying to remove Schedule' });
+        }
+
+        return res.send({ message: 'Professional updated successfully' });
+    },
+    addOS: async (req, res) => {
+        const professionalId = req.params.id;
+
+        const professional = await Professional.findById(professionalId);
+        if (!professional) {
+            return res.status(404).send({ message: 'Professional not found' });
+        }
+
+        if (professional.obrasSociales.indexOf(req.body.ObraSocialId) === -1) {
+            professional.obrasSociales.push(req.body.ObraSocialId);
+        }
+
+        const updatedProfessional = await Professional.findByIdAndUpdate(professionalId, professional, {
+            new: true,
+            //returnOriginal:false
+        });
+
+        if (!updatedProfessional) {
+            return res.status(500).send({ message: 'Error trying to add OS' });
+        }
+
+        return res.send({ message: 'Professional updated successfully' });
+    },
+    removeOS: async (req, res) => {
+        const professionalId = req.params.id;
+
+        const professional = await Professional.findById(professionalId);
+        if (!professional) {
+            return res.status(404).send({ message: 'Profesional not found' });
+        }
+
+        const { osID } = req.body;
+        const index = professional.obrasSociales.indexOf(osID);
+        if (index === -1) {
+            return res.status(404).send({ message: 'Schedule not found' });
+        }
+        professional.obrasSociales.splice(index, 1);
+
+        const updateProfessional = await Professional.findByIdAndUpdate(professionalId, professional, {
+            new: true,
+        });
+
+        if (!updateProfessional) {
+            return res.status(500).send({ message: 'Error trying to remove OS' });
+        }
+
+        return res.send({ message: 'Professional updated successfully' });
+    },
+    addPractice: async (req, res) => {
+        const professionalId = req.params.id;
+
+        const professional = await Professional.findById(professionalId);
+        if (!professional) {
+            return res.status(404).send({ message: 'Professional not found' });
+        }
+
+        if (professional.practicas.indexOf(req.body.practicaId) === -1) {
+            professional.practicas.push(req.body.practicaId);
+        }
+
+        const updatedProfessional = await Professional.findByIdAndUpdate(professionalId, professional, {
+            new: true,
+            //returnOriginal:false
+        });
+
+        if (!updatedProfessional) {
+            return res.status(500).send({ message: 'Error trying to add the practice' });
         }
 
         return res.send({ message: 'Professional updated successfully' });
