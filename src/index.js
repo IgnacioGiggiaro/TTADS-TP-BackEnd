@@ -1,6 +1,7 @@
 const cors= require('cors');
 const express = require('express');
 const path = require('path');
+require('dotenv').config();
 const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const session = require('express-session');

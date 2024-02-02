@@ -8,8 +8,10 @@ const PacienteSchema = new Schema({
     apellido: { type: String, required:true},
     telefono: { type: String, required:true},
     mail: { type: String, required:true},
+    password:{ type:String,required:true},
     direccion: { type: String, required:true},
-    fecha_nac:{ type: Date, required:true}
+    fecha_nac:{ type: Date, required:true},
+    master:{type:Boolean, required:true}
 });
 
 module.exports=mongoose.model('Paciente', PacienteSchema)
