@@ -43,7 +43,7 @@ const professionalController = {
                     mail: req.body.mail,
                     direccion: req.body.direccion,
                     fecha_nac: req.body.fecha_nac,
-                    schedule: req.body.schedule,
+                    schedules: req.body.schedules,
                     obrasSociales: req.body.obrasSociales,
                     practicas: req.body.practicas
                 });
