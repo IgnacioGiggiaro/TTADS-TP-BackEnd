@@ -133,8 +133,8 @@ const professionalController = {
         if (!professional) {
             return res.status(404).send({ message: 'Professional not found' });
         }
-        if (professional.obrasSociales.indexOf(req.body.obraSocialId) === -1) {
-            professional.obrasSociales.push(req.body.obraSocialId);
+        if (professional.obrasSociales.indexOf(req.params.idOS) === -1) {
+            professional.obrasSociales.push(req.params.idOS);
         }
         const updatedProfessional = await Professional.findByIdAndUpdate(professionalId, professional, {
             new: true,
@@ -151,7 +151,7 @@ const professionalController = {
         if (!professional) {
             return res.status(404).send({ message: 'Profesional not found' });
         }
-        const { obraSocialId } = req.body;
+        const obraSocialId = req.params.idOS; // Corregir esta línea
         const index = professional.obrasSociales.indexOf(obraSocialId);
         if (index === -1) {
             return res.status(404).send({ message: 'Schedule not found' });

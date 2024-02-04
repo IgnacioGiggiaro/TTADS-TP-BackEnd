@@ -67,13 +67,26 @@ Content-Type: application/json
 POST http://localhost:3000/Professional HTTP/1.1
 Content-Type: application/json
 
-{"dni": "40258741",
-  "nombre": "Ricardo",
-  "apellido": "Ruben",
-  "telefono": "3411236478",
-  "mail": "ricardoruben1978@gmail.com",
-  "direccion": "Italia 90",
-  "fecha_nac": "10/08/1960"
+{
+  "dni": "18527022",
+  "nombre": "Alfredo",
+  "apellido": "Tombolini",
+  "telefono": "1111111111",
+  "mail": "a.tombolini@example.com",
+  "direccion": "Calle falsa 123",
+  "fecha_nac": "1964-01-19T03:00:00.000Z",
+  "schedules": [
+    "631ca5d12cdd1cba2151f1ac"
+  ],
+  "obrasSociales": [
+    "62dc6b30294deeae93787cef",
+    "631a358a642b6367578986a1"
+  ],
+  "practicas": [
+    "62f6cd459671f1694b1feb71",
+    "6321e11c74714c24886aaffb",
+    "6323b4e39692099aad721dcf"
+  ]
 }
 ###
 GET http://localhost:3000/Professional/62f6cce99671f1694b1feb6e/r HTTP/1.1
