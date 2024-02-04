@@ -7,8 +7,8 @@ router.get('/', controller.getProfessional);
 router.get('/:id/', controller.getProfessionalByID);
 
 router.get("/:id/OS", controller.retrieveOS);
-router.post('/:id/OS', controller.addOS);
-router.delete('/:id/OS', controller.removeOS);
+router.post('/:id/OS/:idOS', controller.addOS);
+router.delete('/:id/OS/:idOS', controller.removeOS);
 
 router.get('/:id/:fecha', controller.retrieveProfessional);
 
