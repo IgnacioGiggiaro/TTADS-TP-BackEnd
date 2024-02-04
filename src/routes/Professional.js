@@ -5,12 +5,23 @@ const router = express.Router();
 
 router.get('/', controller.getProfessional);
 router.get('/:id/', controller.getProfessionalByID);
+
+router.get("/:id/OS", controller.retrieveOS);
+router.post('/:id/OS', controller.addOS);
+router.delete('/:id/OS', controller.removeOS);
+
 router.get('/:id/:fecha', controller.retrieveProfessional);
-// router.get('/p', controller.prueba);
+
 router.post('/', controller.createProfessional);
 router.delete('/:id/', controller.deleteProfessional);
 router.put('/:id/', controller.updateProfessional);
-router.post('/Professional/:id/Schedule', controller.addSchedule);
-router.delete('/Professional/:id/Schedule', controller.removeSchedule);
-//router.get('/Professional/Schedule/:id', controller.getSchedule);
+
+router.post('/:id/Schedule', controller.addSchedule);
+router.delete('/:id/Schedule', controller.removeSchedule);
+
+
+
+router.post('/:id/Practice', controller.addPractice);
+router.delete('/:id/Practice', controller.removePractice);
+
 module.exports= router;

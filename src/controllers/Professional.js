@@ -1,5 +1,6 @@
 const Professional = require ('../models/Professional');
-const {turnoController} = require("./Index");
+const ObraSocial = require ('../models/ObraSocial')
+const {turnoController, obraSocialController} = require("./Index");
 const {Turno} = require("../models");
 const {Schedule}=require("../models");
 const moment = require("moment");
@@ -259,34 +260,23 @@ const professionalController = {
             return res.status(500).send({ message: 'Error searching Turnos' });
         }
     },
-    /*getSchedule: async (req, res) => {
+    retrieveOS: async (req, res) => {
         try {
             const professionalId = req.params.id;
-            //const date = req.params.fecha;
-
             const professional = await Professional.findById(professionalId);
-            console.log(`Professional: ${JSON.stringify(professional)}`);
-
             if (!professional) {
                 return res.status(404).send({ message: 'Professional not found' });
             }
-
-            //const dateString = moment(date).format('dddd');
-            //console.log(`DateString: ${JSON.stringify(dateString)}`);
-
-            const schedule = await Professional.findOne({ _id: professionalId }).populate('schedules', 'dia');
-            console.log(`Schedule: ${JSON.stringify(schedule)}`);
-
-            const sche = await Schedule.find((schedule) => schedule._id === schedule.schedules);
-            console.log(`Schedule: ${JSON.stringify(sche)}`);
-
-            return res.status(200).json(sche);
+            let obrasSociales = [];
+            for (let i = 0; i < professional.obrasSociales.length; i++) {
+                const osId = professional.obrasSociales[i];
+                obrasSociales.push(osId)
+            }
+            return res.status(200).json(obrasSociales);
         } catch (error) {
-            console.error(error);
-            return res.status(500).send({ message: 'Error searching Turnos' });
+            return res.status(500).send({ message: 'Error retrieving OS', error: error.message });
         }
-    }*/
-
+    }
 }
 
 module.exports= professionalController;
