@@ -1,5 +1,6 @@
 const Professional = require ('../models/Professional');
-const {turnoController} = require("./Index");
+const ObraSocial = require ('../models/ObraSocial')
+const {turnoController, obraSocialController} = require("./Index");
 const {Turno} = require("../models");
 const {Schedule}=require("../models");
 const moment = require("moment");
@@ -259,6 +260,23 @@ const professionalController = {
             return res.status(500).send({ message: 'Error searching Turnos' });
         }
     },
+    retrieveOS: async (req, res) => {
+        try {
+            const professionalId = req.params.id;
+            const professional = await Professional.findById(professionalId);
+            if (!professional) {
+                return res.status(404).send({ message: 'Professional not found' });
+            }
+            let obrasSociales = [];
+            for (let i = 0; i < professional.obrasSociales.length; i++) {
+                const osId = professional.obrasSociales[i];
+                obrasSociales.push(osId)
+            }
+            return res.status(200).json(obrasSociales);
+        } catch (error) {
+            return res.status(500).send({ message: 'Error retrieving OS', error: error.message });
+        }
+    }
 }
 
 module.exports= professionalController;
