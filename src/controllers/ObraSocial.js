@@ -4,7 +4,8 @@ const obraSocialController = {
     createObraSocial: async (req, res) => {
         try{
             const newObraSocial = new ObraSocial({
-              nombre: req.body.nombre
+                nombre: req.body.nombre,
+                imgURL: req.body.imgURL
             });
             await newObraSocial.save();
             return res.status(200).send({success:true, newObraSocial});
@@ -50,7 +51,8 @@ const obraSocialController = {
     updateObraSocial: async (req, res) => {
         try {
             const updatedObraSocial = await ObraSocial.findByIdAndUpdate(req.params.id, {
-                nombre: req.body.nombre
+                nombre: req.body.nombre,
+                imgURL: req.body.imgURL
             }).exec();
 
             if (!updatedObraSocial) return res.status(404).send({ message: `There is no obraSocial with ID: ${req.params.id}` });
