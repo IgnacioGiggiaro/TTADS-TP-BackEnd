@@ -172,8 +172,8 @@ const professionalController = {
         if (!professional) {
             return res.status(404).send({ message: 'Professional not found' });
         }
-        if (professional.practicas.indexOf(req.body.practicaId) === -1) {
-            professional.practicas.push(req.body.practicaId);
+        if (professional.practicas.indexOf(req.params.idPractice) === -1) {
+            professional.practicas.push(req.params.idPractice);
         }
         const updatedProfessional = await Professional.findByIdAndUpdate(professionalId, professional, {
             new: true,
@@ -190,7 +190,7 @@ const professionalController = {
         if (!professional) {
             return res.status(404).send({ message: 'Profesional not found' });
         }
-        const { practicaId } = req.body;
+        const practicaId = req.params.idPractice;
         const index = professional.practicas.indexOf(practicaId);
         if (index === -1) {
             return res.status(404).send({ message: 'Practice not found' });
@@ -273,6 +273,23 @@ const professionalController = {
                 obrasSociales.push(osId)
             }
             return res.status(200).json(obrasSociales);
+        } catch (error) {
+            return res.status(500).send({ message: 'Error retrieving OS', error: error.message });
+        }
+    },
+    retrievePractice: async (req, res) => {
+        try {
+            const professionalId = req.params.id;
+            const professional = await Professional.findById(professionalId);
+            if (!professional) {
+                return res.status(404).send({ message: 'Professional not found' });
+            }
+            let practice = [];
+            for (let i = 0; i < professional.practicas.length; i++) {
+                const practiceId = professional.practicas[i];
+                practice.push(practiceId)
+            }
+            return res.status(200).json(practice);
         } catch (error) {
             return res.status(500).send({ message: 'Error retrieving OS', error: error.message });
         }
