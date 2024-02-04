@@ -1,5 +1,6 @@
 const Professional = require ('../models/Professional');
-const {turnoController} = require("./Index");
+const ObraSocial = require ('../models/ObraSocial')
+const {turnoController, obraSocialController} = require("./Index");
 const {Turno} = require("../models");
 const {Schedule}=require("../models");
 const moment = require("moment");
@@ -43,7 +44,9 @@ const professionalController = {
                     mail: req.body.mail,
                     direccion: req.body.direccion,
                     fecha_nac: req.body.fecha_nac,
-                    schedule: req.body.schedule
+                    schedules: req.body.schedules,
+                    obrasSociales: req.body.obrasSociales,
+                    practicas: req.body.practicas
                 });
                 await newProfessional.save();
                 return res.status(200).send({success:true, newProfessional});
@@ -72,7 +75,9 @@ const professionalController = {
                     mail: req.body.mail,
                     direccion: req.body.direccion,
                     fecha_nac: req.body.fecha_nac,
-                    schedule: req.body.schedule}
+                    schedule: req.body.schedule,
+                    obrasSociales: req.body.obrasSociales,
+                    practicas: req.body.practicas}
             ).exec();
 
             if (!updatedProfessional) return res.status(404).send ({message: `There is no Professional with Id: ${req.params.id} `});
@@ -82,54 +87,125 @@ const professionalController = {
             return res.status(503).send({message: 'error updating Professional'})
         }
     },
+
     addSchedule: async (req, res) => {
         const professionalId = req.params.id;
-
         const professional = await Professional.findById(professionalId);
         if (!professional) {
             return res.status(404).send({ message: 'Professional not found' });
         }
-
-        if (professional.schedules.indexOf(req.body.schedulesId) === -1) {
-            professional.schedules.push(req.body.schedulesId);
+        if (professional.schedules.indexOf(req.body.scheduleId) === -1) {
+            professional.schedules.push(req.body.scheduleId);
         }
-
         const updatedProfessional = await Professional.findByIdAndUpdate(professionalId, professional, {
             new: true,
-            //returnOriginal:false
         });
-
         if (!updatedProfessional) {
             return res.status(500).send({ message: 'Error trying to add Schedule' });
         }
-
         return res.send({ message: 'Professional updated successfully' });
     },
+
     removeSchedule: async (req, res) => {
         const professionalId = req.params.id;
-
         const professional = await Professional.findById(professionalId);
         if (!professional) {
             return res.status(404).send({ message: 'Profesional not found' });
         }
-
         const { scheduleId } = req.body;
         const index = professional.schedules.indexOf(scheduleId);
         if (index === -1) {
             return res.status(404).send({ message: 'Schedule not found' });
         }
         professional.schedules.splice(index, 1);
-
         const updateProfessional = await Professional.findByIdAndUpdate(professionalId, professional, {
             new: true,
         });
-
         if (!updateProfessional) {
             return res.status(500).send({ message: 'Error trying to remove Schedule' });
         }
-
         return res.send({ message: 'Professional updated successfully' });
     },
+
+    addOS: async (req, res) => {
+        const professionalId = req.params.id;
+        const professional = await Professional.findById(professionalId);
+        if (!professional) {
+            return res.status(404).send({ message: 'Professional not found' });
+        }
+        if (professional.obrasSociales.indexOf(req.body.obraSocialId) === -1) {
+            professional.obrasSociales.push(req.body.obraSocialId);
+        }
+        const updatedProfessional = await Professional.findByIdAndUpdate(professionalId, professional, {
+            new: true,
+        });
+        if (!updatedProfessional) {
+            return res.status(500).send({ message: 'Error trying to add OS' });
+        }
+        return res.send({ message: 'Professional updated successfully' });
+    },
+
+    removeOS: async (req, res) => {
+        const professionalId = req.params.id;
+        const professional = await Professional.findById(professionalId);
+        if (!professional) {
+            return res.status(404).send({ message: 'Profesional not found' });
+        }
+        const { obraSocialId } = req.body;
+        const index = professional.obrasSociales.indexOf(obraSocialId);
+        if (index === -1) {
+            return res.status(404).send({ message: 'Schedule not found' });
+        }
+        professional.obrasSociales.splice(index, 1);
+        const updateProfessional = await Professional.findByIdAndUpdate(professionalId, professional, {
+            new: true,
+        });
+        if (!updateProfessional) {
+            return res.status(500).send({ message: 'Error trying to remove OS' });
+        }
+        return res.send({ message: 'Professional updated successfully' });
+    },
+
+    addPractice: async (req, res) => {
+        const professionalId = req.params.id;
+        const professional = await Professional.findById(professionalId);
+        if (!professional) {
+            return res.status(404).send({ message: 'Professional not found' });
+        }
+        if (professional.practicas.indexOf(req.body.practicaId) === -1) {
+            professional.practicas.push(req.body.practicaId);
+        }
+        const updatedProfessional = await Professional.findByIdAndUpdate(professionalId, professional, {
+            new: true,
+        });
+        if (!updatedProfessional) {
+            return res.status(500).send({ message: 'Error trying to add the practice' });
+        }
+        return res.send({ message: 'Professional updated successfully' });
+    },
+
+    removePractice: async (req, res) => {
+        const professionalId = req.params.id;
+        const professional = await Professional.findById(professionalId);
+        if (!professional) {
+            return res.status(404).send({ message: 'Profesional not found' });
+        }
+        const { practicaId } = req.body;
+        const index = professional.practicas.indexOf(practicaId);
+        if (index === -1) {
+            return res.status(404).send({ message: 'Practice not found' });
+        }
+        professional.practicas.splice(index, 1);
+        const updateProfessional = await Professional.findByIdAndUpdate(professionalId, professional, {
+            new: true,
+        });
+        if (!updateProfessional) {
+            return res.status(500).send({ message: 'Error trying to remove practicas' });
+        }
+        return res.send({ message: 'Professional updated successfully' });
+    },
+
+
     retrieveProfessional: async (req, res) => {
         try {
             const professionalId = req.params.id;
@@ -153,7 +229,6 @@ const professionalController = {
 
             var cont = sche.hsDesde;
             let turns = [];
-
             while (cont <= (sche.hsHasta - 0.25)) {
                 console.log(`Cont: ${JSON.stringify(cont)}`);
                 let turn = new Turn();
@@ -162,7 +237,6 @@ const professionalController = {
                 turns.push(turn);
                 cont = cont + 0.25;
             }
-
             let turnosByPD= await turnoController.getTurnoByPD(req.params.id, date);
             console.log(`TurnosByPD: ${JSON.stringify(turnosByPD)}`);
             let allTurns = [];
@@ -176,11 +250,9 @@ const professionalController = {
                     }
                 }
             }
-
             if (!turns.length) {
                 return res.status(503).send({ message: 'No hay turnos para ese profesional ese día' });
             }
-
             console.log(turns);
             return res.status(200).json(turns);
         } catch (error) {
@@ -188,34 +260,23 @@ const professionalController = {
             return res.status(500).send({ message: 'Error searching Turnos' });
         }
     },
-    /*getSchedule: async (req, res) => {
+    retrieveOS: async (req, res) => {
         try {
             const professionalId = req.params.id;
-            //const date = req.params.fecha;
-
             const professional = await Professional.findById(professionalId);
-            console.log(`Professional: ${JSON.stringify(professional)}`);
-
             if (!professional) {
                 return res.status(404).send({ message: 'Professional not found' });
             }
-
-            //const dateString = moment(date).format('dddd');
-            //console.log(`DateString: ${JSON.stringify(dateString)}`);
-
-            const schedule = await Professional.findOne({ _id: professionalId }).populate('schedules', 'dia');
-            console.log(`Schedule: ${JSON.stringify(schedule)}`);
-
-            const sche = await Schedule.find((schedule) => schedule._id === schedule.schedules);
-            console.log(`Schedule: ${JSON.stringify(sche)}`);
-
-            return res.status(200).json(sche);
+            let obrasSociales = [];
+            for (let i = 0; i < professional.obrasSociales.length; i++) {
+                const osId = professional.obrasSociales[i];
+                obrasSociales.push(osId)
+            }
+            return res.status(200).json(obrasSociales);
         } catch (error) {
-            console.error(error);
-            return res.status(500).send({ message: 'Error searching Turnos' });
+            return res.status(500).send({ message: 'Error retrieving OS', error: error.message });
         }
-    }*/
-
+    }
 }
 
 module.exports= professionalController;
