@@ -9,4 +9,4 @@ router.post('/', controller.createSchedule);
 router.delete('/:id/', controller.deleteSchedule);
 router.put('/:id/', controller.updateSchedule);
 
-module.exports= router;
+module.exports = router;
