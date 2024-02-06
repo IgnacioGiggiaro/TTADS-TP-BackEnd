@@ -24,8 +24,4 @@ router.post('/:id/Schedule', controller.addSchedule);
 router.delete('/:id/Schedule', controller.removeSchedule);
 
 
-
-
-
-
-module.exports= router;
+module.exports = router;

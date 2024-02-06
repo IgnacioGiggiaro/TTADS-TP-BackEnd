@@ -1,3 +1,6 @@
+###Estas request pueden no funcionar. Fueron realizadas a medida que se iba concretando el proyecto
+
+
 ###ObraSocial
 POST http://localhost:3000/ObraSocial
 Content-Type: application/json
