@@ -2,7 +2,7 @@ const {profesionalController, obraSocialController} = require("./Index");
 const ObraSocial = require('../models/ObraSocial')
 const ObraSocial = require('../models/Professional')
 const {Professional} = require("../models");
-
+//test de obra social
 test('Obra Social Osde 720', async () => {
     let OS = new ObraSocial;
     OS = await obraSocialController.getObraSocial("62dc6b30294deeae93787cef");
@@ -11,7 +11,7 @@ test('Obra Social Osde 720', async () => {
     expect(nombre).toBe('Osde 720');
 });
 
-// Prueba para un juego de todos 1
+//test de profesional
 test('Professional ', async () => {
     let Prof = new Professional;
     Prof = await profesionalController.getProfessionalByID("65bfaebb42c8662caae191b5");
