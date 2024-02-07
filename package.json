@@ -41,6 +41,7 @@
   },
   "homepage": "https://github.com/IgnacioGiggiaro/Tomb#readme",
   "devDependencies": {
-    "express-oauth2-jwt-bearer": "^1.6.0"
+    "express-oauth2-jwt-bearer": "^1.6.0",
+    "jest": "^29.7.0"
   }
 }
